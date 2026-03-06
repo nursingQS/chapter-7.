@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disability & Chronic Illness – Chapter 7 Exam</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #bf4e3c, #7d9d6e);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #bf4e3c, #7d9d6e);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #6b2e23;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .counter {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: center;
+            white-space: nowrap;
+            margin-left: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #f0e1d2;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #7d9d6e, #bf4e3c);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #f9f3ef;
+        }
+        
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 3px solid #dbbc9c;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            background: linear-gradient(135deg, #bf4e3c, #7d9d6e);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(191,78,60,0.3);
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #5e2c21;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 20px;
+            border: 3px solid #dbbc9c;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .option:hover {
+            background: #f0e1d2;
+            border-color: #bf4e3c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(191,78,60,0.15);
+        }
+        
+        .option-letter {
+            background: linear-gradient(135deg, #bf4e3c, #7d9d6e);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 3px solid #7d9d6e;
+        }
+        
+        .option.correct {
+            background: linear-gradient(135deg, #66bb6a, #43a047);
+            border-color: #43a047;
+            color: white;
+        }
+        
+        .option.correct .option-letter {
+            background: #43a047;
+            color: white;
+            border-color: #388e3c;
+        }
+        
+        .option.incorrect {
+            background: linear-gradient(135deg, #ef5350, #e53935);
+            border-color: #e53935;
+            color: white;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #e53935;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        .feedback-area {
+            flex-shrink: 0;
+        }
+        
+        .feedback {
+            padding: 25px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+            border: 3px solid #43a047;
+            color: #1b5e20;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
+            border: 3px solid #e53935;
+            color: #b71c1c;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border: 3px solid #ffb300;
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .rationale.show {
+            display: block;
+        }
+        
+        .rationale h4 {
+            color: #ff6f00;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .rationale p {
+            color: #ff6f00;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .calculation-work {
+            background: #fffde7;
+            border-left: 4px solid #4fc3f7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+            white-space: pre-line;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #dbbc9c;
+            border-top: 3px solid #cc9c75;
+            flex-shrink: 0;
+            height: 80px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #bf4e3c, #7d9d6e);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(191,78,60,0.4);
+            background: linear-gradient(135deg, #7d9d6e, #6b2e23);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #90a4ae, #78909c);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(144, 164, 174, 0.4);
+            background: linear-gradient(135deg, #78909c, #546e7a);
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(135deg, #ef5350, #e53935);
+            color: white;
+            display: none;
+        }
+        
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229, 57, 53, 0.4);
+            background: linear-gradient(135deg, #e53935, #c62828);
+        }
+        
+        .btn-cancel.show {
+            display: flex;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 75px;
+                padding: 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1.05rem;
+                gap: 15px;
+            }
+            
+            .option-letter {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                height: 70px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .nav-buttons {
+                gap: 10px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .header {
+                height: 70px;
+                padding: 15px 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Disability & Chronic Illness (Chapter 7)</h1>
+            <div class="subtitle">Models, Barriers & Support – 37 Questions</div>
+        </div>
+        <div class="counter" id="counter">1/37</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>📚 RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+            ⬅️ Previous
+        </button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">
+                ❌ Cancel
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chapter 7: Disability and Chronic Illness – 37 questions
+    const questions = [
+        {
+            id: 1,
+            question: "1. A client who uses a wheelchair was unable to enter a health care clinic because the pavement was too high. The client filed a formal complaint stating that reasonable accommodations were not met. What is an example of a reasonable accommodation under the 1990 American Disabilities Act (ADA)?",
+            options: [
+                "A. Priority medical appointments and grab bars",
+                "B. Low-cost transportation and elevated toilet seats",
+                "C. Accessible facilities and equipment",
+                "D. Alternate communication methods and medical home visits"
+            ],
+            correct: 2, // C
+            rationale: "Correct. In health care facilities, reasonable accommodation included accessible facilities and equipment. The ADA of 1990 did not include priority medical appointments or low-cost transportation. Grab bars and elevated toilet seats fall under accessible equipment. Alternative communication methods also fall under the ADA of 1990, but medical home visits do not. (PTS:1 REF:p.146)"
+        },
+        {
+            id: 2,
+            question: "2. A client tells the nurse that the doctor just told the client that a new diagnosis of rheumatoid arthritis is considered to be a \"chronic condition.\" The client asks the nurse what \"chronic condition\" means. What would be the nurse's best response?",
+            options: [
+                "A. \"It is a health problem that require managements of several months or longer.\"",
+                "B. \"Chronic conditions are disabilities that require medical treatments that limit activity.\"",
+                "C. \"Medical conditions are chronic when they culminate in disabilities that require hospitalization.\"",
+                "D. \"Chronic conditions are conditions that require short-term management in extended-care facilities.\""
+            ],
+            correct: 0, // A
+            rationale: "Correct. Chronic conditions are often defined as medical conditions or health problems with associated symptoms or disabilities that require long-term management (3 months or longer). A chronic disease is not defined as a disability, nor does it always require hospitalization. And chronic diseases do not always limit activity. (PTS:1 REF:p.155)"
+        },
+        {
+            id: 3,
+            question: "3. A medical–surgical nurse is teaching a client about the health implications of the client's recently diagnosed type 2 diabetes. The nurse should teach the client to be proactive with glycemic control to reduce the risk of what health problem?",
+            options: [
+                "A. Urinary tract infections",
+                "B. Renal failure",
+                "C. Pneumonia",
+                "D. Inflammatory bowel disease"
+            ],
+            correct: 1, // B
+            rationale: "Correct. One chronic disease can lead to the development of other chronic conditions. Diabetes, for example, can eventually lead to neurologic and vascular changes that may result in visual, cardiac, and kidney disease and erectile dysfunction. Diabetes is not directly linked to urinary tract infections, pneumonia, or inflammatory bowel disease. (PTS:1 REF:p.159)"
+        },
+        {
+            id: 4,
+            question: "4. An international nurse has noted that a trend in emerging countries is a decrease in mortality from some acute conditions. What has contributed to this decrease in mortality from some acute conditions?",
+            options: [
+                "A. Improved nutrition",
+                "B. Integration of alternative health practices",
+                "C. Stronger international security measures",
+                "D. Decreases in obesity"
+            ],
+            correct: 0, // A
+            rationale: "Correct. In emerging countries, chronic conditions have seen a decrease in mortality due to improved nutrition, immunizations, and prompt and aggressive management of acute conditions. The integration of alternative health practices has not contributed to a decrease in mortality. Stronger international security measures have not contributed to a decrease in mortality. Obesity has not decreased, even in emerging countries. (PTS:1 REF:p.159)"
+        },
+        {
+            id: 5,
+            question: "5. A 37-year-old client with multiple sclerosis is married and has three children. The nurse has worked extensively with the client and family to plan appropriate care. What is the nurse's most important role with this client?",
+            options: [
+                "A. Ensure the client adheres to all treatments.",
+                "B. Provide the client with advice on alternative treatment options.",
+                "C. Provide a detailed plan of activities of daily living (ADLs) for the client.",
+                "D. Help the client develop strategies to implement treatment regimens."
+            ],
+            correct: 3, // D
+            rationale: "Correct. The most important role of the nurse working with clients with chronic illness is to help clients develop the strategies needed to implement their treatment regimens and carry out activities of daily living. The nurse cannot ensure the client adheres to all treatments. Providing the client with advice on alternate treatments is a specific option in the broader statement of developing strategies. The nurse does not provide the client with a detailed plan of ADLs, though promotion of ADLs is a priority. (PTS:1 REF:p.145)"
+        },
+        {
+            id: 6,
+            question: "6. A client has recently been diagnosed with type 2 diabetes. The client is clinically obese and has a sedentary lifestyle. How can the nurse best begin to help the client increase their activity level?",
+            options: [
+                "A. Set up appointment times at a local fitness center for the client to attend.",
+                "B. Have a family member ensure the client follows a suggested exercise plan.",
+                "C. Construct an exercise program and have the client follow it.",
+                "D. Identify barriers with the client that inhibit lifestyle changes."
+            ],
+            correct: 3, // D
+            rationale: "Correct. Identifying barriers that inhibit a lifestyle change will increase the likelihood that these changes will become permanent. Nurses and family members can support and encourage a client to increase their activity but only the client can actually ensure that it occurs. The client may not be ready or willing to accept this lifestyle change. (PTS:1 REF:p.161)"
+        },
+        {
+            id: 7,
+            question: "7. A home care nurse is making an initial visit to a 68-year-old client. The nurse finds the client tearful and emotionally withdrawn. Even though the client lives alone and has no family, the client has been managing well at home until now. What would be the most appropriate action for the nurse to take?",
+            options: [
+                "A. Reassess the client's psychosocial status and make the necessary referrals.",
+                "B. Have the client volunteer in the community for social contact.",
+                "C. Arrange for the client to be reassessed by a social worker.",
+                "D. Encourage the client to focus on the positive aspects of life."
+            ],
+            correct: 0, // A
+            rationale: "Correct. The client is exhibiting signs of depression and should be reassessed and a referral made as necessary. Clients with chronic illness are at an increased risk of depression. It would be simplistic to arrange for the client to volunteer or focus on the positive. Social work may or may not be needed; assessment should precede such a referral. (PTS:1 REF:p.145)"
+        },
+        {
+            id: 8,
+            question: "8. The nurse is caring for a male client with a history of chronic angina. The client states that after breakfast he usually takes a shower and shaves. It is at this time, the client says, that he tends to experience chest pain. What should the nurse counsel the client to do to decrease the likelihood of angina in the morning?",
+            options: [
+                "A. Shower in the evening and shave before breakfast.",
+                "B. Skip breakfast and eat an early lunch.",
+                "C. Take a nitroglycerin tab prior to breakfast.",
+                "D. Shower once a week and shave prior to breakfast."
+            ],
+            correct: 0, // A
+            rationale: "Correct. If the nurse determines that one of the situations most likely to precipitate angina is to shower and shave after breakfast, the nurse might counsel the client to break these activities into different times during the day. Skipping breakfast and eating an early lunch would not decrease the likelihood of angina in the morning. Taking a nitroglycerin tablet before breakfast is inappropriate because the event requiring the medication has not yet occurred. Also, suggesting that the client shower once a week and shave prior to breakfast is an incorrect suggestion because showering and shaving can both be done every day if they are spread out over the course of the day. (PTS:1 REF:p.160)"
+        },
+        {
+            id: 9,
+            question: "9. A client uses a wheelchair. The client wants to attend a church-sponsored support group for parents of children diagnosed with autism spectrum disorder. The client arrives at the church and realizes there are no ramps or elevators to the basement. What type of barrier did this client encounter?",
+            options: [
+                "A. A structural barrier",
+                "B. A barrier to health care",
+                "C. An institutional barrier",
+                "D. A transportation barrier"
+            ],
+            correct: 0, // A
+            rationale: "Correct. Structural barriers make certain facilities inaccessible. Examples of structural barriers include stairs, lack of ramps, narrow doorways that do not permit entry of a wheelchair, and restroom facilities that cannot be used by people with physical impairments. Institutional barriers are policies, guidelines, or procedures that place certain groups of people at a disadvantage. Transportation barriers are any physical objects that hinder the flow of people moving from one location to another. And health care barriers are described as anything that limits and/or restricts the use of health services. (PTS:1 REF:p.149)"
+        },
+        {
+            id: 10,
+            question: "10. A client who is legally blind is being admitted to the hospital. The client informs the nurse that they need to have their guide dog present during hospitalization. What is the nurse's best response to the client?",
+            options: [
+                "A. \"Arrangements can be made for your guide dog to be at the hospital with you during your stay.\"",
+                "B. \"I will need to check with the care team before that decision can be made.\"",
+                "C. \"Because of infection control, your guide dog will likely not be allowed to stay in your room during your hospitalization.\"",
+                "D. \"Your guide dog can stay with you during your hospitalization, but it will need to stay in a cage or crate that you will need to provide.\""
+            ],
+            correct: 0, // A
+            rationale: "Correct. If clients usually use service animals to assist them with ADLs, it is necessary to make arrangements for the accommodation of these animals. The client should be moved to a private room, and a cage would prevent the service dog from freely assisting the client, so it is not necessary. (PTS:1 REF:p.152)"
+        },
+        {
+            id: 11,
+            question: "11. A nurse is taking an Advanced Cardiovascular Life Support class. The nurse has dyslexia and is given an extra hour to complete the exam. What type of disability best defines the nurse's condition?",
+            options: [
+                "A. Intellectual disability",
+                "B. Sensory disability",
+                "C. Psychiatric disability",
+                "D. Cognitive disability"
+            ],
+            correct: 1, // B
+            rationale: "Correct. A sensory disability is an impairment of sight, hearing, smell, and touch. It also includes learning disabilities such as dyslexia. Intellectual disability occurs before the age of 18 and is characterized by significant limitations in both intellectual functioning and adaptive behavior. Psychiatric disability is defined as mental illness that substantially limits a client's ability to complete major life activities. Cognitive disability is a limitation in mental functioning and difficulties with communication, self-care, and social skills. (PTS:1 REF:p.143)"
+        },
+        {
+            id: 12,
+            question: "12. A 19-year-old client with a diagnosis of Down syndrome is being admitted to the unit for the treatment of community-acquired pneumonia. When planning this client's care, the nurse recognizes that this client's disability is categorized as what type?",
+            options: [
+                "A. A sensory disability",
+                "B. A developmental disability",
+                "C. An acquired disability",
+                "D. An age-associated disability"
+            ],
+            correct: 1, // B
+            rationale: "Correct. Developmental disabilities are those that occur any time from birth to 22 years of age and result in impairment of physical or mental health, cognition, speech, language, or self-care. Examples of developmental disabilities are spina bifida, cerebral palsy, Down syndrome, and muscular dystrophy. Acquired disabilities may occur as a result of an acute and sudden injury, acute nontraumatic disorders, or progression of a chronic disorder. Age-related disabilities are those that occur in an older adult population and are thought to be due to the aging process. A sensory disability is a type of a disability and not a category. (PTS:1 REF:p.142)"
+        },
+        {
+            id: 13,
+            question: "13. The nurse is reviewing the importance of preventive health care with a client who has a disability. The client describes intense financial pressures associated with being disabled. What is the nurse's best response?",
+            options: [
+                "A. \"Limited finances are a common problem for clients with a disability.\"",
+                "B. \"Is there anyone who you might be able to borrow money from in the short term?\"",
+                "C. \"I'll look into federal assistance programs that provide financial assistance for health-related expenses for people with disabling conditions.\"",
+                "D. \"Many of your expenses should be tax deductible, so you should consult with your accountant and then make your appointments.\""
+            ],
+            correct: 2, // C
+            rationale: "Correct. Several federal assistance programs provide financial assistance for health-related expenses for people with some chronic illnesses, acquired disabling acute and chronic diseases, and diseases from childhood. Lack of financial resources, including health insurance, is an important barrier to health care for people with disabilities. Acknowledging the problem without proposing solutions is insufficient. The nurse does not know the tax implications of the client's circumstances and should not encourage borrowing as an initial approach. (PTS:1 REF:p.150)"
+        },
+        {
+            id: 14,
+            question: "14. As a case manager, the nurse oversees the multidisciplinary care of several clients living with chronic conditions. Two of the nurse's clients are living with spina bifida. The center of care for these two clients will typically exist where?",
+            options: [
+                "A. In the hospital",
+                "B. In the health care provider's office",
+                "C. In the home",
+                "D. In the rehabilitation facility"
+            ],
+            correct: 2, // C
+            rationale: "Correct. The day-to-day management of illness is largely the responsibility of people with chronic disorders and their families. As a result, the home, rather than the hospital, is the center of care in chronic conditions. Hospitals, rehabilitation facilities, clinics, health care provider's offices, nursing homes, nursing centers, and community agencies are considered adjuncts or backup services to daily home management. (PTS:1 REF:p.160)"
+        },
+        {
+            id: 15,
+            question: "15. A nurse is planning the care of a client who has been diagnosed with asthma, which the nurse recognizes as being a chronic condition. Which of the following descriptors apply to chronic conditions? Select all that apply.",
+            options: [
+                "A. Resolve slowly",
+                "B. Rarely are completely cured",
+                "C. Have a short, unpredictable course",
+                "D. Do not resolve spontaneously",
+                "E. Have a prolonged course"
+            ],
+            correct: [1, 3, 4], // B, D, E
+            rationale: "Correct. Chronic conditions can also be defined as illnesses or diseases that have a prolonged course, do not resolve spontaneously, and are rarely completely cured. They do not typically resolve, whether slowly or otherwise, and have a long, predictable course. (PTS:1 REF:p.159)"
+        },
+        {
+            id: 16,
+            question: "16. A 55-year-old woman with multiple sclerosis is deficient in completing health screening and health promotion tests. Based on the information provided, and statistical data, what is the most likely test that the client missed?",
+            options: [
+                "A. Yearly physical",
+                "B. Pelvic examination",
+                "C. Colonoscopy",
+                "D. Hearing test"
+            ],
+            correct: 1, // B
+            rationale: "Correct. Minority and older women with disabilities are less likely to receive a pelvic examination. Some reasons given by clients include difficulty transferring to exam tables and a belief that the exam was not needed due to their disability. No statistical data was listed for yearly physicals, colonoscopy, or hearing tests in this forum. (PTS:1 REF:p.150)"
+        },
+        {
+            id: 17,
+            question: "17. A client who has recently been diagnosed with chronic heart failure is being taught by the nurse how to live successfully with the chronic condition. The client's ability to meet this goal will primarily depend on the client's ability to do which of the following?",
+            options: [
+                "A. Lower the client's expectations for quality of life and level of function.",
+                "B. Access community services to eventually cure the disease.",
+                "C. Adapt a lifestyle to accommodate the client's symptoms.",
+                "D. Establish good rapport with the client's primary care provider."
+            ],
+            correct: 2, // C
+            rationale: "Correct. Successful management of chronic conditions depends largely on the client's ability to adapt in order to accommodate symptoms. However, telling the client to lower their expectations is a simplistic and negative interpretation of this reality. Rapport is beneficial, but not paramount. A cure is not normally an option. (PTS:1 REF:p.162)"
+        },
+        {
+            id: 18,
+            question: "18. A major cause of health-related problems is the increase in the incidence of chronic conditions. Which factor has contributed to the increased incidence of chronic diseases in developing countries?",
+            options: [
+                "A. A decrease in average life expectancy",
+                "B. Increasing amounts of health research",
+                "C. A lack of health infrastructure to manage illness",
+                "D. Adoption of a more sedentary lifestyle, which is increasing obesity"
+            ],
+            correct: 3, // D
+            rationale: "Correct. Obesity is no longer limited to high-income countries but increasingly occurs in less developed countries. By the year 2030, it is estimated that almost half of the world's population will be classified as overweight or obese. There is indeed a lack of health infrastructure in many countries, but this is not cited as the cause of the increased incidence of chronic diseases. In many developing countries, an increase in life expectancy is occurring. Developing countries vary in strength concerning their health infrastructure. (PTS:1 REF:p.158)"
+        },
+        {
+            id: 19,
+            question: "19. A client with a spinal cord injury is being assessed by the nurse prior to being discharged from the rehabilitation facility. The nurse is planning care through the lens of the interface model of disability. Within this model, the nurse will plan care based on what belief?",
+            options: [
+                "A. The client has the potential to function effectively despite the disability.",
+                "B. The client's condition does not have to affect their lifestyle.",
+                "C. The client will not require care from professional caregivers in the home setting.",
+                "D. The client's disability is the most significant aspect of the client's personal identity."
+            ],
+            correct: 0, // A
+            rationale: "Correct. The interface model does not ignore the condition or its disabling effects; instead, it promotes the view that people with disabilities are capable, responsible people who are able to function effectively despite having a disability. This does not mean that the client will not require care, however, or that it will not affect their lifestyle. The person's disability is not their identity. (PTS:1 REF:p.144)"
+        },
+        {
+            id: 20,
+            question: "20. During the care conference for a client who has multiple chronic conditions, the case manager has alluded to the principles of the interface model of disability. What statement is most characteristic of this model?",
+            options: [
+                "A. \"This client should be free to plan their care without our interference.\"",
+                "B. \"This client can be empowered and doesn't have to be dependent.\"",
+                "C. \"This client was a very different person before the emergence of these health problems.\"",
+                "D. \"This client's physiologic problems are the priority over their psychosocial status.\""
+            ],
+            correct: 1, // B
+            rationale: "Correct. The interface model focuses on care that is empowering rather than care that promotes dependency. The other listed statements are inconsistent with the principles of the interface model. (PTS:1 REF:p.144)"
+        },
+        {
+            id: 21,
+            question: "21. The nurse is caring for a 25-year-old client with a traumatic brain injury and severe disabilities caused by a motor vehicle accident. The client asks the nurse for education about sex in regards to their condition. How should the nurse respond?",
+            options: [
+                "A. \"I can have another health care provider discuss it with you tomorrow.\"",
+                "B. \"Try to focus on the bigger picture of getting physically stronger. We can talk about sex once you are more stable.\"",
+                "C. \"First, I think you should talk to your significant other to discuss the limits of your physical relationship.\"",
+                "D. \"Do you have specific questions first? I can bring additional resources into the discussion as needed.\""
+            ],
+            correct: 3, // D
+            rationale: "Correct. Approaching the topic of sexual health should be started as soon as the client shows an interest. Social attitudes and bias against sexual relationships that involve clients with disabilities often result in health care providers not discussing the topic and/or failing to take their interest seriously. Addressing sexual issues is important and helps them distinguish between healthy and abusive interactions and relationships. So, the discussion with their significant other first is not always beneficial, informative, or timely to the client. It is not necessary to have another health care provider discuss sexual issues with the client, nor would it be appropriate to delay this discussion. (PTS:1 REF:p.147)"
+        },
+        {
+            id: 22,
+            question: "22. The nurse is caring for a 25-year-old client who has Down syndrome and who has just been diagnosed with type 2 diabetes. What consideration should the nurse prioritize when planning this client's nursing care?",
+            options: [
+                "A. How the new diagnosis affects health attitudes",
+                "B. How diabetes affects the course of Down syndrome",
+                "C. How the chromosomal disorder affects the client's glucose metabolism",
+                "D. How the developmental disability influences the client's health management"
+            ],
+            correct: 3, // D
+            rationale: "Correct. It is important to consider the interaction between existing disabilities and new diagnoses. Cognitive and motor deficits would greatly affect diabetes management. Diabetes would not likely affect the client's attitude or the course of the Down syndrome. Chromosomal disorders such as Down syndrome do not affect glucose metabolism. (PTS:1 REF:p.145)"
+        },
+        {
+            id: 23,
+            question: "23. The nurse is caring for a young mother who has a longstanding diagnosis of multiple sclerosis (MS). The parent was admitted with a postpartum infection 3 days ago, and the plan is to discharge the client home when the client has finished 5 days of IV antibiotic therapy. What information would be most useful for the nurse to provide at discharge?",
+            options: [
+                "A. A long discussion and overview of postpartum infections",
+                "B. How the response to infection never differs in clients with MS",
+                "C. The same information you would provide to a client without a chronic condition",
+                "D. Information on effective management of MS in the home setting"
+            ],
+            correct: 2, // C
+            rationale: "Correct. In general, clients with disabilities are in need of the same information as other clients. Infection may exacerbate MS; so a specific discussion about these signs and symptoms is appropriate. Information on home management of MS and a long discussion of postpartum infections has likely been already provided to the client. (PTS:1 REF:p.154)"
+        },
+        {
+            id: 24,
+            question: "24. A new client has been admitted with a diagnosis of stage IV breast cancer. The client has a comorbidity of myasthenia gravis. During the initial assessment, the client states that they felt the lump in the breast about 9 months ago. The nurse asks the client why they did not see the health care provider when first finding the lump in breast. What would be a factor that is known to influence the client in seeking health care services?",
+            options: [
+                "A. Lack of insight due to the success of self-managing a chronic condition",
+                "B. Lack of knowledge about treatment options",
+                "C. Overly sensitive client reactions to health care services",
+                "D. Unfavorable interactions with health care providers"
+            ],
+            correct: 3, // D
+            rationale: "Correct. Because of unfavorable interactions with health care providers, including negative attitudes, insensitivity, and lack of knowledge, people with disabilities may avoid seeking medical intervention. The population of people who are disabled is not overly sensitive to the reactions of those providing health care services. This is more likely than lack of insight or knowledge on the part of the client. (PTS:1 REF:p.154)"
+        },
+        {
+            id: 25,
+            question: "25. The community nurse is caring for a client who has paraplegia following a farm accident when they were an adolescent. This client is now 64 years old and has just been diagnosed with congestive heart failure. The client states, \"I'm so afraid about what is going to happen to me.\" What would be the best nursing intervention for this client?",
+            options: [
+                "A. Assist the client in making suitable plans for care.",
+                "B. Take the client to visit appropriate long-term care facilities.",
+                "C. Give the client pamphlets about available community resources.",
+                "D. Have the client visit with other clients who have congestive heart failure."
+            ],
+            correct: 0, // A
+            rationale: "Correct. The nurse should recognize the concerns of people with disabilities about their future and encourage them to make suitable plans, which may relieve some of their fears and concerns about what will happen to them as they age. Taking the client to visit long-term care facilities may only make the client more afraid, especially if the client is not ready and/or willing to look at long-term care facilities. Giving the client pamphlets about community resources or having the client visit with other clients who have congestive heart failure may not do anything to relieve fears. (PTS:1 REF:p.153)"
+        },
+        {
+            id: 26,
+            question: "26. An initiative has been launched in a large hospital to promote the use of \"people-first\" language in formal and informal communication. What is the significance to the client when the nurse uses \"people-first\" language?",
+            options: [
+                "A. The nurse clearly defines how the disability shapes the client's character.",
+                "B. The client is of more importance to the nurse than the disability.",
+                "C. The client's disability mandates their relationships and life choices.",
+                "D. The nurse knows that the client's disability is a curable condition."
+            ],
+            correct: 1, // B
+            rationale: "Correct. This simple use of language conveys the message that the person, rather than the illness or disability, is of greater importance to the nurse. The other answers are incorrect because no matter what language the nurse uses, the nurse knows that a disability does not define a client's character. The client's disability is not the most important aspect in the client's life, and the client's disability may be managed but is not likely to be cured. (PTS:1 REF:p.153)"
+        },
+        {
+            id: 27,
+            question: "27. A client who is recovering from a stroke expresses frustration about their care to the nurse, stating, \"It seems like everyone sees me as just a problem that needs fixing.\" This client's statement is suggestive of what model of disability?",
+            options: [
+                "A. Biopsychosocial model",
+                "B. Social model",
+                "C. Rehabilitation model",
+                "D. Interface model"
+            ],
+            correct: 2, // C
+            rationale: "Correct. The rehabilitation model regards disability as a deficiency that requires a rehabilitation specialist or other helping professional to fix the problem. The biopsychosocial model is an interdisciplinary model that interconnects biology, psychology, and social-environmental factors. A social model identifies systemic barriers, derogatory attitudes, and social exclusion. An interface model promotes care designed to be empowering rather than promoting dependency in clients with disabilities. (PTS:1 REF:p.144)"
+        },
+        {
+            id: 28,
+            question: "28. The interface model of disability is being used to plan the care of a client who is living with the effects of a stroke. Why should the nurse prioritize this model?",
+            options: [
+                "A. It fosters dependency and rapport between the caregiver and the client.",
+                "B. It encourages the provision of care that is based specifically on the disability.",
+                "C. It promotes interactions with clients focused on the root cause of the disability.",
+                "D. It promotes the idea that clients are capable and responsible."
+            ],
+            correct: 3, // D
+            rationale: "Correct. The interface model promotes the view that people with disabilities are capable, responsible people who are able to function effectively despite having a disability. It does not foster dependency, encourage giving care based on the client's disability, or encourage or promote interactions with clients that are focused on the cause of the disability. (PTS:1 REF:p.144)"
+        },
+        {
+            id: 29,
+            question: "29. A nurse knows that clients with \"invisible\" disabilities like chronic pain often feel that their chronic conditions are more challenging to deal with than more visible disabilities. Why would they feel this way?",
+            options: [
+                "A. Invisible disabilities create negative attitudes in the health care community.",
+                "B. Despite appearances, invisible disabilities can be as disabling as visible disabilities.",
+                "C. Disabilities, such as chronic pain, are apparent to the general population.",
+                "D. Disabilities, such as chronic pain, may not be curable, unlike visible disabilities."
+            ],
+            correct: 1, // B
+            rationale: "Correct. Many disabilities are visible, but invisible disabilities are often as disabling as those that can be seen. Invisible disabilities are not noted to create negative attitudes among health care workers, though this is a possibility. Disabilities such as chronic pain are considered invisible because they are not apparent to the general population. (PTS:1 REF:p.143)"
+        },
+        {
+            id: 30,
+            question: "30. A couple who are in their early 80s have provided constant care for their 44-year-old child who has Down syndrome. When planning this family's care, the nurse should be aware that the parents most likely have concerns around what question?",
+            options: [
+                "A. \"What could we have done better for our child?\"",
+                "B. \"Why was our child born with Down syndrome while our other children are healthy?\"",
+                "C. \"Who will care for our child once we're unable?\"",
+                "D. \"Will we experience the effects of developmental disabilities late in life?\""
+            ],
+            correct: 2, // C
+            rationale: "Correct. Parents of adult children with developmental disabilities often fear what will happen when they are no longer available and able to care for their children. Developmental delays do not have a late-onset. Concerns about the causes of their child's disease likely predominated when he was younger. (PTS:1 REF:p.153)"
+        },
+        {
+            id: 31,
+            question: "31. Many individuals with disabilities are employed. What has research shown about this employed population?",
+            options: [
+                "A. Their salaries are commensurate with their experience.",
+                "B. They enjoy their jobs more than people who do not have disabilities.",
+                "C. Employment rates are higher among people with a disability than those without.",
+                "D. People with disabilities earn less money than people without disabilities."
+            ],
+            correct: 3, // D
+            rationale: "Correct. Employed people with a disability earn less money than people without disabilities. On average, workers with disabilities salaries are not commensurate with their experience. Job satisfaction is not noted to differ. Employment rates are lower for people with a disability due, in part, to hiring practices, cognitive requirements, and physical limitations. (PTS:1 REF:p.142)"
+        },
+        {
+            id: 32,
+            question: "32. A 43-year-old female client with epilepsy is admitted to the hospital. The client has been on seizure medications most of their adult life. What would be an appropriate care plan for this client?",
+            options: [
+                "A. Altered mental status related to history of seizures",
+                "B. Increased fall risk related to medication regimen",
+                "C. Risk for aspiration related to swallowing difficulties",
+                "D. Self-care deficit related to cognitive impairment"
+            ],
+            correct: 1, // B
+            rationale: "Correct. Increased fall risk is greater in female clients who use seizure medications which can result in bone loss and osteoporosis. Based on the information provided; the client's mental status, swallowing difficulty, and ability to take care of oneself cannot be determined. The other care plans are not appropriate without an evaluation. (PTS:1 REF:p.152)"
+        },
+        {
+            id: 33,
+            question: "33. A nurse is presenting at a health fair and is promoting the benefits of maintaining a healthy body weight. The nurse should refer to reductions in the risks of what diseases? Select all that apply.",
+            options: [
+                "A. Heart disease",
+                "B. Stroke",
+                "C. Neurologic cancers",
+                "D. Diabetes",
+                "E. Hypertension"
+            ],
+            correct: [0, 1, 3, 4], // A, B, D, E
+            rationale: "Correct. The increasing prevalence of obesity has increased the incidence of heart disease, strokes, diabetes, and hypertension. Obesity is not usually cited as a major risk factor for most types of neurologic cancer. (PTS:1 REF:p.158)"
+        },
+        {
+            id: 34,
+            question: "34. A nurse is aware that the number of people in the United States who are living with disabilities is expected to continue increasing. What is considered to be one of the factors contributing to this increase?",
+            options: [
+                "A. The decrease in the number of people with early-onset disabilities",
+                "B. The increased inability to cure chronic disorders",
+                "C. Changes in infection patterns resulting from antibiotic resistance",
+                "D. Increased survival rates among people who experience trauma"
+            ],
+            correct: 3, // D
+            rationale: "Correct. The number of people with disabilities is expected to increase over time as people with early-onset disabilities, chronic disorders, and severe trauma survive and have normal or near-normal lifespans. There has not been a decrease in the number of people with early-onset disabilities. Acquired chronic disorders still cannot be cured. (PTS:1 REF:p.142)"
+        },
+        {
+            id: 35,
+            question: "35. A 45-year-old client was diagnosed with schizophrenia at the age of 20. The client is having trouble finding community-based services to help increase their quality of life. Which program would most benefit the client?",
+            options: [
+                "A. Medicaid",
+                "B. Tricare",
+                "C. American Disabilities Act",
+                "D. Medicare"
+            ],
+            correct: 0, // A
+            rationale: "Correct. Medicaid provides home and community-based services to people with disabilities to enable a better quality of life for them and their families. Tricare is health insurance for uniformed service members, retirees, and their families. The American Disabilities Act of 1990 is a civil law that prohibits discrimination based on a disability. Medicare is a federal health insurance program that is available to most people over 65, people with permanent kidney injury, and certain qualified people with disabilities. (PTS:1 REF:p.151)"
+        },
+        {
+            id: 36,
+            question: "36. A 39-year-old client with paraplegia has been admitted to the hospital for the treatment of a sacral pressure injury. The nurse is aware that the client normally lives alone in an apartment and manages their ADLs independently. Before creating the client's plan of care, how should the nurse best identify the level of assistance that the client will require in the hospital?",
+            options: [
+                "A. Make referrals for assessment to occupational therapy and physical therapy.",
+                "B. Talk with the client about the type and level of assistance that the client desires.",
+                "C. Obtain the client's previous medical record and note what was done during their most recent admission.",
+                "D. Apply a standardized care plan that addresses the needs of a client with paraplegia."
+            ],
+            correct: 1, // B
+            rationale: "Correct. Clients should be asked preferences about approaches to carrying out their ADLs, and assistive devices they require should be readily available. The other listed actions may be necessary in some cases, but the ultimate resource should be the client. (PTS:1 REF:p.148)"
+        },
+        {
+            id: 37,
+            question: "37. A community health nurse has drafted a program that will address the health promotion needs of members of the community who live with one or more disabilities. Which area of health promotion education is known to be neglected among adults with disabilities?",
+            options: [
+                "A. Blood pressure screening",
+                "B. Diabetes testing",
+                "C. Nutrition",
+                "D. Sexual health"
+            ],
+            correct: 3, // D
+            rationale: "Correct. Health promotion interventions addressing sexual health in disabled individuals are necessary but rare. Blood pressure testing, diabetes testing, and nutrition are not known to constitute such a gap in health promotion teaching. (PTS:1 REF:p.152)"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[q.id - 1];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'Finish ➡️' : 'Next ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[q.id - 1];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[q.id - 1] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT! Well done.';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. The correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[q.id - 1] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[q.id - 1];
+            loadQuestion();
+        }
+    }
+
+    // keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
